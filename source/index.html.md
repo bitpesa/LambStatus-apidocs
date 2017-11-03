@@ -202,6 +202,10 @@ curl -X POST "https://<your_api_endpoint>/api/v0/metrics/data" \
 
 If the metric is "Self" type, you can submit data points via this endpoint. See [the wiki](https://github.com/ks888/LambStatus/wiki/The-usage-of-%22Self%22-type-metrics) to start using the "Self" type metric.
 
+### HTTP Request
+
+`POST https://<your_api_endpoint>/api/v0/metrics/data`
+
 ### Parameters
 
 Parameter | Description
