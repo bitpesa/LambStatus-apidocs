@@ -1,98 +1,64 @@
 ---
-title: API Reference
+title: LambStatus API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/ks888/LambStatus'>GitHub ks888/LambStatus</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
 
 search: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+LambStatus provides a simple and powerful REST API, which enables you to:
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+* create and update components and incidents
+* submit data points of your monitoring system's metrics
+* ...
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+<aside class="notice">Note that the API is v0 and in the experimental status. Feel free to <a href="https://github.com/ks888/LambStatus/issues/new">open a new issue</a> for feature requests!</aside>
+
+# API Endpoint
+
+Your API endpoint is same as your admin page url. By default, it's something like `xxxxxxxxxxxxxx.cloudfront.net`.
 
 # Authentication
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+> All the API calls look something like this:
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl "https://<your_api_endpoint>/api/..."
+  -H "x-api-key: <your_api_key>"
 ```
 
-```javascript
-const kittn = require('kittn');
+> Make sure to replace `<your_api_endpoint>` and `<your_api_key>`.
 
-let api = kittn.authorize('meowmeowmeow');
-```
+The API uses API keys to allow access to the API. The "Settings" page of your admin page shows you one or more API keys:
 
-> Make sure to replace `meowmeowmeow` with your API key.
+   <img src="images/api_key1.png">
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+If there is no key, create a new one by clicking the "+" icon and then the "SAVE" button.
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+   <img src="images/api_key2.png">
 
-`Authorization: meowmeowmeow`
+The API expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`x-api-key: your_api_key`
 
-# Kittens
+# Rate Limiting
 
-## Get All Kittens
+Each API token is limited to 10 requests / second.
 
-```ruby
-require 'kittn'
+# Components
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## List Components
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl "https://<your_api_endpoint>/api/v0/components" \
+  -H "x-api-key: <your_api_key>"
 ```
 
 > The above command returns JSON structured like this:
@@ -100,140 +66,165 @@ let kittens = api.kittens.get();
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "componentID": "the_component_id",
+    "name": "Website",
+    "description": "",
+    "status": "Operational",
+    "order": 1509676878
   },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
+  ...
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint retrieves all components.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET https://<your_api_endpoint>/api/v0/components`
 
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Create a New Component
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+curl -X POST "https://<your_api_endpoint>/api/v0/components" \
+  -d '{"name":"Website", "description":"", "status":"Operational"}' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "componentID": "aKR6rTg0aW2d",
+  "name": "Website",
+  "description": "",
+  "status": "Operational",
+  "order": 1509676878
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint create a new component.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`POST https://<your_api_endpoint>/api/v0/components`
 
-### URL Parameters
+### Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+name | The component name
+description | The description of the component
+status | The current status of the component. Must be one of `Operational`, `Under Maintenance`, `Degraded Performance`, `Partial Outage` and `Major Outage`.
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+## Update the Component
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+curl -X PATCH "https://<your_api_endpoint>/api/v0/components/<your_component_id>" \
+  -d '{"status":"Major Outage"}' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "componentID": "aKR6rTg0aW2d",
+  "name": "Website",
+  "description": "",
+  "status": "Major Outage",
+  "order": 1509676878
 }
 ```
 
-This endpoint deletes a specific kitten.
+This endpoint update the component.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`PATCH https://<your_api_endpoint>/api/v0/components/{componentid}`
 
-### URL Parameters
+### Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to delete
+componentid | The component id
+name | The component name
+description | The description of the component
+status | The current status of the component. Must be one of `Operational`, `Under Maintenance`, `Degraded Performance`, `Partial Outage` and `Major Outage`.
+
+## Delete the component
+
+```shell
+curl -X DELETE "https://<your_api_endpoint>/api/v0/components/<your_component_id>" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns 204 No Content.
+
+This endpoint deletes the component.
+
+### HTTP Request
+
+`DELETE https://<your_api_endpoint>/api/v0/components/{componentid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+componentid | The component id
+
+# Metrics
+
+## Submit data points
+
+```shell
+curl -X POST "https://<your_api_endpoint>/api/v0/metrics/data" \
+  -d '{
+    "<your_metric_id>": [
+      {"timestamp": "2017-06-05T00:00:00.000Z", "value": 1},
+      {"timestamp": "2017-06-05T00:01:00.000Z", "value": 2}
+    ]
+  }' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "ARzfSNr5lb3G":[
+    {"timestamp": "2017-11-03T00:00:00.000Z", "value": 1},
+    {"timestamp": "2017-11-03T00:01:00.000Z", "value": 2}
+  ]
+}
+```
+
+> The response body is the ACTUAL values saved in the storage. So some data points may be omitted and the second part of a timestamp may be discarded.
+
+If the metric is "Self" type, you can submit data points via this endpoint. See [the wiki](https://github.com/ks888/LambStatus/wiki/The-usage-of-%22Self%22-type-metrics) to start using the "Self" type metric.
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+\<your_metric_id\> | The metric ID
+timestamp | The timestamp of the data point. The second and millisecond parts of the timestamp is discarded. For example, the timestamp `2017-06-05T11:11:11.111Z` is saved as `2017-06-05T11:11:00.000Z`
+value | The data point value.
+
+<aside class="notice">The data points are saved by the minutes. If there are multiple points in one minute, only the latest point is saved.</aside>
+<aside class="notice">The number of data points per request must be equal to or less than 3000.</aside>
+
+# Errors
+
+> One or more errors will be returned in the following format:
+
+```json
+{
+  "errors": [
+    {"message": "message describing condition"},
+    ...
+  ]
+}
+```
+
+Actionable failure conditions are reported as part of 4xx responses, in a json response body.
 
