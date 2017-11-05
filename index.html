@@ -249,6 +249,26 @@
               </ul>
           </li>
           <li>
+            <a href="#incidents" class="toc-h1 toc-link" data-title="Incidents">Incidents</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-incidents" class="toc-h2 toc-link" data-title="List Incidents">List Incidents</a>
+                  </li>
+                  <li>
+                    <a href="#get-an-incident" class="toc-h2 toc-link" data-title="Get an incident">Get an incident</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-new-incident" class="toc-h2 toc-link" data-title="Create a New Incident">Create a New Incident</a>
+                  </li>
+                  <li>
+                    <a href="#update-the-incident" class="toc-h2 toc-link" data-title="Update the Incident">Update the Incident</a>
+                  </li>
+                  <li>
+                    <a href="#delete-the-incident" class="toc-h2 toc-link" data-title="Delete the incident">Delete the incident</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#metrics" class="toc-h1 toc-link" data-title="Metrics">Metrics</a>
               <ul class="toc-list-h2">
                   <li>
@@ -312,7 +332,7 @@
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"componentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"the_component_id"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"componentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Website"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operational"</span><span class="p">,</span><span class="w">
@@ -339,7 +359,7 @@
   </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509676878</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint create a new component.</p>
+<p>This endpoint creates a new component.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://&lt;your_api_endpoint&gt;/api/v0/components</code></p>
 <h3 id='parameters'>Parameters</h3>
@@ -377,7 +397,7 @@
   </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509676878</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint update the component.</p>
+<p>This endpoint updates the component.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>PATCH https://&lt;your_api_endpoint&gt;/api/v0/components/{componentid}</code></p>
 <h3 id='parameters-2'>Parameters</h3>
@@ -426,6 +446,202 @@
 <td>The component id</td>
 </tr>
 </tbody></table>
+<h1 id='incidents'>Incidents</h1><h2 id='list-incidents'>List Incidents</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/incidents"</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DNS resolution issues"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investigating"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:04:04.016Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:04:04.016Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all incidents.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://&lt;your_api_endpoint&gt;/api/v0/incidents</code></p>
+<h2 id='get-an-incident'>Get an incident</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/incidents/&lt;your_incident_id&gt;"</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DNS resolution issues"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investigating"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:44.915Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:44.915Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"incidentUpdates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1PGVAHA4ml9X"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investigating"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We are investigating DNS resolution issues."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:45.155Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:45.155Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specified incident with the list of its incident updates.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET https://&lt;your_api_endpoint&gt;/api/v0/incidents/{incidentid}</code></p>
+<h3 id='parameters-4'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>incidentid</td>
+<td>The incident id</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-new-incident'>Create a New Incident</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/incidents"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name":"DNS resolution issues",
+    "status":"Investigating",
+    "message":"We are investigating DNS resolution issues."
+  }'</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span> -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DNS resolution issues"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investigating"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:44.915Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:44.915Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"incidentUpdates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1PGVAHA4ml9X"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investigating"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We are investigating DNS resolution issues."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:45.155Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:45.155Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates a new incident.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST https://&lt;your_api_endpoint&gt;/api/v0/incidents</code></p>
+<h3 id='parameters-5'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The incident name</td>
+</tr>
+<tr>
+<td>status</td>
+<td>The current status of the incident. Must be one of <code>Investigating</code>, <code>Identified</code>, <code>Monitoring</code> and <code>Resolved</code>.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>The description of the incident&#39;s current status</td>
+</tr>
+</tbody></table>
+<h2 id='update-the-incident'>Update the Incident</h2><pre class="highlight shell tab-shell"><code>curl -X PATCH <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/incidents/&lt;your_incident_id&gt;"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "status":"Identified",
+    "message":"We have migrated to an unaffected DNS provider. Some users may experience problems with cached results as the change propagates."
+  }'</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span> -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DNS resolution issues"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Identified"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:44.915Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T10:33:34.490Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"incidentUpdates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1PGVAHA4ml9X"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investigating"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We are investigating DNS resolution issues."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:45.155Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T09:20:45.155Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"incidentID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aKR6rTg0aW2d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ThFwz6BHTlef"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"incidentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Identified"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We have migrated to an unaffected DNS provider. Some users may experience problems with cached results as the change propagates."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T10:33:34.684Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-05T10:33:34.684Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint updates the incident.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>PATCH https://&lt;your_api_endpoint&gt;/api/v0/incidents/{incidentid}</code></p>
+<h3 id='parameters-6'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>incidentid</td>
+<td>The incident id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The incident name</td>
+</tr>
+<tr>
+<td>status</td>
+<td>The current status of the incident. Must be one of <code>Investigating</code>, <code>Identified</code>, <code>Monitoring</code> and <code>Resolved</code>.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>The description of the incident&#39;s current status</td>
+</tr>
+</tbody></table>
+<h2 id='delete-the-incident'>Delete the incident</h2><pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/incidents/&lt;your_incident_id&gt;"</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns 204 No Content.</p>
+</blockquote>
+
+<p>This endpoint deletes the incident.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>DELETE https://&lt;your_api_endpoint&gt;/api/v0/incidents/{incidentid}</code></p>
+<h3 id='parameters-7'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>incidentid</td>
+<td>The incident id</td>
+</tr>
+</tbody></table>
 <h1 id='metrics'>Metrics</h1><h2 id='submit-data-points'>Submit data points</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/metrics/data"</span> <span class="se">\</span>
   -d <span class="s1">'{
     "&lt;your_metric_id&gt;": [
@@ -450,7 +666,9 @@
 </blockquote>
 
 <p>If the metric is &quot;Self&quot; type, you can submit data points via this endpoint. See <a href="https://github.com/ks888/LambStatus/wiki/The-usage-of-%22Self%22-type-metrics">the wiki</a> to start using the &quot;Self&quot; type metric.</p>
-<h3 id='parameters-4'>Parameters</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>POST https://&lt;your_api_endpoint&gt;/api/v0/metrics/data</code></p>
+<h3 id='parameters-8'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
