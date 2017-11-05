@@ -66,7 +66,7 @@ curl "https://<your_api_endpoint>/api/v0/components" \
 ```json
 [
   {
-    "componentID": "the_component_id",
+    "componentID": "aKR6rTg0aW2d",
     "name": "Website",
     "description": "",
     "status": "Operational",
@@ -102,7 +102,7 @@ curl -X POST "https://<your_api_endpoint>/api/v0/components" \
 }
 ```
 
-This endpoint create a new component.
+This endpoint creates a new component.
 
 ### HTTP Request
 
@@ -136,7 +136,7 @@ curl -X PATCH "https://<your_api_endpoint>/api/v0/components/<your_component_id>
 }
 ```
 
-This endpoint update the component.
+This endpoint updates the component.
 
 ### HTTP Request
 
@@ -171,6 +171,202 @@ This endpoint deletes the component.
 Parameter | Description
 --------- | -----------
 componentid | The component id
+
+# Incidents
+
+## List Incidents
+
+```shell
+curl "https://<your_api_endpoint>/api/v0/incidents" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "incidentID": "aKR6rTg0aW2d",
+    "name": "DNS resolution issues",
+    "status": "Investigating",
+    "createdAt": "2017-11-05T09:04:04.016Z",
+    "updatedAt": "2017-11-05T09:04:04.016Z"
+  },
+  ...
+]
+```
+
+This endpoint retrieves all incidents.
+
+### HTTP Request
+
+`GET https://<your_api_endpoint>/api/v0/incidents`
+
+## Get an incident
+
+```shell
+curl "https://<your_api_endpoint>/api/v0/incidents/<your_incident_id>" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "incidentID": "aKR6rTg0aW2d",
+  "name": "DNS resolution issues",
+  "status": "Investigating",
+  "createdAt": "2017-11-05T09:20:44.915Z",
+  "updatedAt": "2017-11-05T09:20:44.915Z",
+  "incidentUpdates": [
+    {
+      "incidentID": "aKR6rTg0aW2d",
+      "incidentUpdateID": "1PGVAHA4ml9X",
+      "incidentStatus": "Investigating",
+      "message": "We are investigating DNS resolution issues.",
+      "createdAt": "2017-11-05T09:20:45.155Z",
+      "updatedAt": "2017-11-05T09:20:45.155Z"
+    }
+  ]
+}
+```
+
+This endpoint retrieves a specified incident with the list of its incident updates.
+
+### HTTP Request
+
+`GET https://<your_api_endpoint>/api/v0/incidents/{incidentid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+incidentid | The incident id
+
+## Create a New Incident
+
+```shell
+curl -X POST "https://<your_api_endpoint>/api/v0/incidents" \
+  -d '{
+    "name":"DNS resolution issues",
+    "status":"Investigating",
+    "message":"We are investigating DNS resolution issues."
+  }' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "incidentID": "aKR6rTg0aW2d",
+  "name": "DNS resolution issues",
+  "status": "Investigating",
+  "createdAt": "2017-11-05T09:20:44.915Z",
+  "updatedAt": "2017-11-05T09:20:44.915Z",
+  "incidentUpdates": [
+    {
+      "incidentID": "aKR6rTg0aW2d",
+      "incidentUpdateID": "1PGVAHA4ml9X",
+      "incidentStatus": "Investigating",
+      "message": "We are investigating DNS resolution issues.",
+      "createdAt": "2017-11-05T09:20:45.155Z",
+      "updatedAt": "2017-11-05T09:20:45.155Z"
+    }
+  ]
+}
+```
+
+This endpoint creates a new incident.
+
+### HTTP Request
+
+`POST https://<your_api_endpoint>/api/v0/incidents`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | The incident name
+status | The current status of the incident. Must be one of `Investigating`, `Identified`, `Monitoring` and `Resolved`.
+message | The description of the incident's current status
+
+## Update the Incident
+
+```shell
+curl -X PATCH "https://<your_api_endpoint>/api/v0/incidents/<your_incident_id>" \
+  -d '{
+    "status":"Identified",
+    "message":"We have migrated to an unaffected DNS provider. Some users may experience problems with cached results as the change propagates."
+  }' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "incidentID": "aKR6rTg0aW2d",
+  "name": "DNS resolution issues",
+  "status": "Identified",
+  "createdAt": "2017-11-05T09:20:44.915Z",
+  "updatedAt": "2017-11-05T10:33:34.490Z",
+  "incidentUpdates": [
+    {
+      "incidentID": "aKR6rTg0aW2d",
+      "incidentUpdateID": "1PGVAHA4ml9X",
+      "incidentStatus": "Investigating",
+      "message": "We are investigating DNS resolution issues.",
+      "createdAt": "2017-11-05T09:20:45.155Z",
+      "updatedAt": "2017-11-05T09:20:45.155Z"
+    },
+    {
+      "incidentID": "aKR6rTg0aW2d",
+      "incidentUpdateID": "ThFwz6BHTlef",
+      "incidentStatus": "Identified",
+      "message": "We have migrated to an unaffected DNS provider. Some users may experience problems with cached results as the change propagates.",
+      "createdAt": "2017-11-05T10:33:34.684Z",
+      "updatedAt": "2017-11-05T10:33:34.684Z"
+    }
+  ]
+}
+```
+
+This endpoint updates the incident.
+
+### HTTP Request
+
+`PATCH https://<your_api_endpoint>/api/v0/incidents/{incidentid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+incidentid | The incident id
+name | The incident name
+status | The current status of the incident. Must be one of `Investigating`, `Identified`, `Monitoring` and `Resolved`.
+message | The description of the incident's current status
+
+## Delete the incident
+
+```shell
+curl -X DELETE "https://<your_api_endpoint>/api/v0/incidents/<your_incident_id>" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns 204 No Content.
+
+This endpoint deletes the incident.
+
+### HTTP Request
+
+`DELETE https://<your_api_endpoint>/api/v0/incidents/{incidentid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+incidentid | The incident id
 
 # Metrics
 
