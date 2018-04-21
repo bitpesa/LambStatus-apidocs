@@ -288,7 +288,7 @@ This endpoint creates a new incident.
 Parameter | Description
 --------- | -----------
 name | The incident name
-status | The current status of the incident. Must be one of `Investigating`, `Identified`, `Monitoring` and `Resolved`.
+status | The current status of the incident. Must be one of `Investigating`, `Identified`, `Monitoring` or `Resolved`.
 message | The description of the incident's current status
 
 ## Update the Incident
@@ -367,6 +367,216 @@ This endpoint deletes the incident.
 Parameter | Description
 --------- | -----------
 incidentid | The incident id
+
+# Maintenance
+
+## List Maintenance
+
+```shell
+curl "https://<your_api_endpoint>/api/v0/maintenances" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "maintenanceID": "UUzuSiFAmhSK",
+    "name": "Network maintenance",
+    "status": "Scheduled",
+    "startAt": "2018-04-22T16:00:00.000Z",
+    "endAt": "2018-04-22T19:00:00.000Z",
+    "createdAt": "2018-04-21T03:10:00.228Z",
+    "updatedAt": "2018-04-21T03:10:00.228Z"
+  },
+  ...
+]
+```
+
+This endpoint retrieves all maintenance.
+
+### HTTP Request
+
+`GET https://<your_api_endpoint>/api/v0/maintenances`
+
+## Get a maintenance
+
+```shell
+curl "https://<your_api_endpoint>/api/v0/maintenances/<your_maintenance_id>" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "maintenanceID": "UUzuSiFAmhSK",
+  "name": "Network maintenance",
+  "status": "Scheduled",
+  "startAt": "2018-04-22T16:00:00.000Z",
+  "endAt": "2018-04-22T19:00:00.000Z",
+  "createdAt": "2018-04-21T03:10:00.228Z",
+  "updatedAt": "2018-04-21T03:10:00.228Z",
+  "maintenanceUpdates": [
+    {
+      "maintenanceID": "UUzuSiFAmhSK",
+      "maintenanceUpdateID": "vPwSwBHNPSZK",
+      "maintenanceStatus": "Scheduled",
+      "message": "We will perform network maintenance. Brief customer service interruption is expected from this maintenance.",
+      "createdAt": "2018-04-21T03:10:00.228Z",
+      "updatedAt": "2018-04-21T03:10:00.228Z"
+    }
+  ]
+}
+```
+
+This endpoint retrieves a specified maintenance with the list of its maintenance updates.
+
+### HTTP Request
+
+`GET https://<your_api_endpoint>/api/v0/maintenances/{maintenanceid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+maintenanceid | The maintenance id
+
+## Create a New Maintenance
+
+```shell
+curl -X POST "https://<your_api_endpoint>/api/v0/maintenances" \
+  -d '{
+    "name": "Network maintenance",
+    "status": "Scheduled",
+    "startAt": "2018-04-22T16:00:00.000Z",
+    "endAt": "2018-04-22T19:00:00.000Z",
+    "message": "We will perform network maintenance. Brief customer service interruption is expected from this maintenance."
+  }' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "maintenanceID": "UUzuSiFAmhSK",
+  "name": "Network maintenance",
+  "status": "Scheduled",
+  "startAt": "2018-04-22T16:00:00.000Z",
+  "endAt": "2018-04-22T19:00:00.000Z",
+  "createdAt": "2018-04-21T03:10:00.228Z",
+  "updatedAt": "2018-04-21T03:10:00.228Z",
+  "maintenanceUpdates": [
+    {
+      "maintenanceID": "UUzuSiFAmhSK",
+      "maintenanceUpdateID": "vPwSwBHNPSZK",
+      "maintenanceStatus": "Scheduled",
+      "message": "We will perform network maintenance. Brief customer service interruption is expected from this maintenance.",
+      "createdAt": "2018-04-21T03:10:00.228Z",
+      "updatedAt": "2018-04-21T03:10:00.228Z"
+    }
+  ]
+}
+```
+
+This endpoint creates a new maintenance.
+
+### HTTP Request
+
+`POST https://<your_api_endpoint>/api/v0/maintenances`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | The maintenance name
+status | The current status of the maintenance. Must be one of `Scheduled`, `In Progress`, `Verifying` or `Completed`.
+startAt | The starting time of the maintenance
+endAt | The ending time of the maintenance
+message | The description of the maintenance's current status
+
+## Update the Maintenance
+
+```shell
+curl -X PATCH "https://<your_api_endpoint>/api/v0/maintenances/<your_maintenance_id>" \
+  -d '{
+    "status":"In Progress",
+    "message":"The maintenance starts as scheduled."
+  }' \
+  -H "x-api-key: <your_api_key>" -H "Content-Type: application/json"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "maintenanceID": "UUzuSiFAmhSK",
+  "name": "Network maintenance",
+  "status": "In Progress",
+  "startAt": "2018-04-22T16:00:00.000Z",
+  "endAt": "2018-04-22T19:00:00.000Z",
+  "createdAt": "2018-04-21T03:10:00.228Z",
+  "updatedAt": "2018-04-21T03:22:42.629Z",
+  "maintenanceUpdates": [
+    {
+      "maintenanceID": "UUzuSiFAmhSK",
+      "maintenanceUpdateID": "HaSx3tFccSUT",
+      "maintenanceStatus": "In Progress",
+      "message": "The maintenance starts as scheduled.",
+      "createdAt": "2018-04-21T03:22:42.629Z",
+      "updatedAt": "2018-04-21T03:22:42.629Z"
+    },
+    {
+      "maintenanceID": "UUzuSiFAmhSK",
+      "maintenanceUpdateID": "vPwSwBHNPSZK",
+      "maintenanceStatus": "Scheduled",
+      "message": "We will perform network maintenance. Brief customer service interruption is expected from this maintenance.",
+      "createdAt": "2018-04-21T03:10:00.228Z",
+      "updatedAt": "2018-04-21T03:10:00.228Z"
+    }
+  ]
+}
+```
+
+This endpoint updates the maintenance.
+
+### HTTP Request
+
+`PATCH https://<your_api_endpoint>/api/v0/maintenances/{maintenanceid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+maintenanceid | The maintenance id
+name | The maintenance name
+status | The current status of the maintenance. Must be one of `Scheduled`, `In Progress`, `Verifying` or `Completed`.
+startAt | The starting time of the maintenance
+endAt | The ending time of the maintenance
+message | The description of the maintenance's current status
+
+## Delete the maintenance
+
+```shell
+curl -X DELETE "https://<your_api_endpoint>/api/v0/maintenances/<your_maintenance_id>" \
+  -H "x-api-key: <your_api_key>"
+```
+
+> The above command returns 204 No Content.
+
+This endpoint deletes the maintenance.
+
+### HTTP Request
+
+`DELETE https://<your_api_endpoint>/api/v0/maintenances/{maintenanceid}`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+maintenanceid | The maintenance id
 
 # Metrics
 
