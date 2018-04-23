@@ -269,6 +269,26 @@
               </ul>
           </li>
           <li>
+            <a href="#maintenance" class="toc-h1 toc-link" data-title="Maintenance">Maintenance</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-maintenance" class="toc-h2 toc-link" data-title="List Maintenance">List Maintenance</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-maintenance" class="toc-h2 toc-link" data-title="Get a maintenance">Get a maintenance</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-new-maintenance" class="toc-h2 toc-link" data-title="Create a New Maintenance">Create a New Maintenance</a>
+                  </li>
+                  <li>
+                    <a href="#update-the-maintenance" class="toc-h2 toc-link" data-title="Update the Maintenance">Update the Maintenance</a>
+                  </li>
+                  <li>
+                    <a href="#delete-the-maintenance" class="toc-h2 toc-link" data-title="Delete the maintenance">Delete the maintenance</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#metrics" class="toc-h1 toc-link" data-title="Metrics">Metrics</a>
               <ul class="toc-list-h2">
                   <li>
@@ -550,7 +570,7 @@
 </tr>
 <tr>
 <td>status</td>
-<td>The current status of the incident. Must be one of <code>Investigating</code>, <code>Identified</code>, <code>Monitoring</code> and <code>Resolved</code>.</td>
+<td>The current status of the incident. Must be one of <code>Investigating</code>, <code>Identified</code>, <code>Monitoring</code> or <code>Resolved</code>.</td>
 </tr>
 <tr>
 <td>message</td>
@@ -642,6 +662,228 @@
 <td>The incident id</td>
 </tr>
 </tbody></table>
+<h1 id='maintenance'>Maintenance</h1><h2 id='list-maintenance'>List Maintenance</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/maintenances"</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Network maintenance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"startAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"endAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all maintenance.</p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>GET https://&lt;your_api_endpoint&gt;/api/v0/maintenances</code></p>
+<h2 id='get-a-maintenance'>Get a maintenance</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/maintenances/&lt;your_maintenance_id&gt;"</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Network maintenance"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"startAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"endAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maintenanceUpdates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vPwSwBHNPSZK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We will perform network maintenance. Brief customer service interruption is expected from this maintenance."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specified maintenance with the list of its maintenance updates.</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>GET https://&lt;your_api_endpoint&gt;/api/v0/maintenances/{maintenanceid}</code></p>
+<h3 id='parameters-8'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>maintenanceid</td>
+<td>The maintenance id</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-new-maintenance'>Create a New Maintenance</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/maintenances"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "name": "Network maintenance",
+    "status": "Scheduled",
+    "startAt": "2018-04-22T16:00:00.000Z",
+    "endAt": "2018-04-22T19:00:00.000Z",
+    "message": "We will perform network maintenance. Brief customer service interruption is expected from this maintenance."
+  }'</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span> -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Network maintenance"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"startAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"endAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maintenanceUpdates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vPwSwBHNPSZK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We will perform network maintenance. Brief customer service interruption is expected from this maintenance."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates a new maintenance.</p>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>POST https://&lt;your_api_endpoint&gt;/api/v0/maintenances</code></p>
+<h3 id='parameters-9'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The maintenance name</td>
+</tr>
+<tr>
+<td>status</td>
+<td>The current status of the maintenance. Must be one of <code>Scheduled</code>, <code>In Progress</code>, <code>Verifying</code> or <code>Completed</code>.</td>
+</tr>
+<tr>
+<td>startAt</td>
+<td>The starting time of the maintenance</td>
+</tr>
+<tr>
+<td>endAt</td>
+<td>The ending time of the maintenance</td>
+</tr>
+<tr>
+<td>message</td>
+<td>The description of the maintenance&#39;s current status</td>
+</tr>
+</tbody></table>
+<h2 id='update-the-maintenance'>Update the Maintenance</h2><pre class="highlight shell tab-shell"><code>curl -X PATCH <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/maintenances/&lt;your_maintenance_id&gt;"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "status":"In Progress",
+    "message":"The maintenance starts as scheduled."
+  }'</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span> -H <span class="s2">"Content-Type: application/json"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Network maintenance"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In Progress"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"startAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"endAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-22T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:22:42.629Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maintenanceUpdates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HaSx3tFccSUT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In Progress"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The maintenance starts as scheduled."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:22:42.629Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:22:42.629Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"maintenanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UUzuSiFAmhSK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceUpdateID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vPwSwBHNPSZK"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maintenanceStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We will perform network maintenance. Brief customer service interruption is expected from this maintenance."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-21T03:10:00.228Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint updates the maintenance.</p>
+<h3 id='http-request-13'>HTTP Request</h3>
+<p><code>PATCH https://&lt;your_api_endpoint&gt;/api/v0/maintenances/{maintenanceid}</code></p>
+<h3 id='parameters-10'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>maintenanceid</td>
+<td>The maintenance id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The maintenance name</td>
+</tr>
+<tr>
+<td>status</td>
+<td>The current status of the maintenance. Must be one of <code>Scheduled</code>, <code>In Progress</code>, <code>Verifying</code> or <code>Completed</code>.</td>
+</tr>
+<tr>
+<td>startAt</td>
+<td>The starting time of the maintenance</td>
+</tr>
+<tr>
+<td>endAt</td>
+<td>The ending time of the maintenance</td>
+</tr>
+<tr>
+<td>message</td>
+<td>The description of the maintenance&#39;s current status</td>
+</tr>
+</tbody></table>
+<h2 id='delete-the-maintenance'>Delete the maintenance</h2><pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/maintenances/&lt;your_maintenance_id&gt;"</span> <span class="se">\</span>
+  -H <span class="s2">"x-api-key: &lt;your_api_key&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns 204 No Content.</p>
+</blockquote>
+
+<p>This endpoint deletes the maintenance.</p>
+<h3 id='http-request-14'>HTTP Request</h3>
+<p><code>DELETE https://&lt;your_api_endpoint&gt;/api/v0/maintenances/{maintenanceid}</code></p>
+<h3 id='parameters-11'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>maintenanceid</td>
+<td>The maintenance id</td>
+</tr>
+</tbody></table>
 <h1 id='metrics'>Metrics</h1><h2 id='submit-data-points'>Submit data points</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://&lt;your_api_endpoint&gt;/api/v0/metrics/data"</span> <span class="se">\</span>
   -d <span class="s1">'{
     "&lt;your_metric_id&gt;": [
@@ -666,9 +908,9 @@
 </blockquote>
 
 <p>If the metric is &quot;Self&quot; type, you can submit data points via this endpoint. See <a href="https://github.com/ks888/LambStatus/wiki/The-usage-of-%22Self%22-type-metrics">the wiki</a> to start using the &quot;Self&quot; type metric.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-15'>HTTP Request</h3>
 <p><code>POST https://&lt;your_api_endpoint&gt;/api/v0/metrics/data</code></p>
-<h3 id='parameters-8'>Parameters</h3>
+<h3 id='parameters-12'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
